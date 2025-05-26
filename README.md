@@ -76,13 +76,13 @@ weatherwise-etl-pipeline/
     Example Output
     Raw Data (Parquet Format)
     Stored in data/raw/weather_data.parquet:
-
+    ```bash
     +---------+-------+------------+--------+-----------+----------+----------+
     | city    | country | temperature | humidity | weather   | wind_speed | timestamp |
     +---------+-------+------------+--------+-----------+----------+----------+
     | New York| US    | 75.2       | 60     | clear sky | 5.1      | 1697049600|
     +---------+-------+------------+--------+-----------+----------+----------+
-
+    ```
     Processed Data
     Stored in data/processed/.
 
