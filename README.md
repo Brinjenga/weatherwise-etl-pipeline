@@ -45,45 +45,48 @@ weatherwise-etl-pipeline/
    cd weatherwise-etl-pipeline
 
 2. Install the required Python dependencies:
-
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
 3. Configure the config.yaml file:
 
-Add your OpenWeatherMap API key.
+  Add your OpenWeatherMap API key.
+  ```bash
   apiKey: "your_api_key_here"
 
 ## Usage
 1. Run the ETL pipeline:
-python pipeline.py
+   ```bash
+   python pipeline.py
 
 2. The pipeline will:
 
-Fetch weather data for the specified cities.
-Transform the data into a structured format.
-Save the raw data in data/raw/ and processed data in data/processed/.
+    Fetch weather data for the specified cities.
+    Transform the data into a structured format.
+    Save the raw data in data/raw/ and processed data in data/processed/.
 
-Example Output
-Raw Data (Parquet Format)
-Stored in data/raw/weather_data.parquet:
+    Example Output
+    Raw Data (Parquet Format)
+    Stored in data/raw/weather_data.parquet:
 
-+---------+-------+------------+--------+-----------+----------+----------+
-| city    | country | temperature | humidity | weather   | wind_speed | timestamp |
-+---------+-------+------------+--------+-----------+----------+----------+
-| New York| US    | 75.2       | 60     | clear sky | 5.1      | 1697049600|
-+---------+-------+------------+--------+-----------+----------+----------+
+    +---------+-------+------------+--------+-----------+----------+----------+
+    | city    | country | temperature | humidity | weather   | wind_speed | timestamp |
+    +---------+-------+------------+--------+-----------+----------+----------+
+    | New York| US    | 75.2       | 60     | clear sky | 5.1      | 1697049600|
+    +---------+-------+------------+--------+-----------+----------+----------+
 
-Processed Data
-Processed Data
-Stored in data/processed/.
+    Processed Data
+    Processed Data
+    Stored in data/processed/.
 
 ## Testing
-Run unit tests to ensure the pipeline works as expected:
-pytest tests/
+    Run unit tests to ensure the pipeline works as expected:
+    ```bash
+    pytest tests/
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+    This project is licensed under the MIT License. See the LICENSE file for details.
 
-Acknowledgments
-- OpenWeatherMap API for providing weather data.
-- Apache Spark for enabling scalable data processing.
+    Acknowledgments
+    - OpenWeatherMap API for providing weather data.
+    - Apache Spark for enabling scalable data processing.
