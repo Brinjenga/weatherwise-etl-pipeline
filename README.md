@@ -5,27 +5,31 @@ WeatherWise is an ETL (Extract, Transform, Load) pipeline designed to fetch, pro
 ## Features
 
 - **Extraction**: 
-Fetches real-time weather data for specified cities using the OpenWeatherMap API.
+  Fetches real-time weather data for specified cities using the OpenWeatherMap API.
 
 - **Transformation**: 
-Cleans and structures the raw weather data into a format suitable for analysis.
+  Cleans and structures the raw weather data into a format suitable for analysis.
 
 - **Loading**: 
-Stores the processed data in Parquet format using Apache Spark for efficient querying and storage.
+  Stores the processed data in Parquet format using Apache Spark for efficient querying and storage.
 
 - **Scalability**: 
-Built with Spark to handle large-scale weather data processing.
+  Built with Spark to handle large-scale weather data processing.
 
 ## Project Structure
 
 weatherwise-etl-pipeline/ 
-├── config/ │ └── config.yaml # Configuration file for API keys 
-├── data/ │ ├── raw/ # Raw weather data stored in Parquet format 
-├── processed/ # Processed and transformed data ├── etl/ 
-├── extract.py # Handles data extraction from OpenWeatherMap API 
-│──transform.py # Transforms raw data into a structured format 
-├── load.py # Loads transformed data into storage 
-├── tests/ │ └── test_extract.py # Unit tests for the extract module 
+├── config/ 
+│   └── config.yaml # Configuration file for API keys 
+├── data/ 
+│   ├── raw/ # Raw weather data stored in Parquet format 
+│   └── processed/ # Processed and transformed data 
+├── etl/ 
+│   ├── extract.py # Handles data extraction from OpenWeatherMap API 
+│   ├── transform.py # Transforms raw data into a structured format 
+│   └── load.py # Loads transformed data into storage 
+├── tests/ 
+│   └── test_extract.py # Unit tests for the extract module 
 ├── pipeline.py # Main script to orchestrate the ETL pipeline 
 ├── requirements.txt # Python dependencies 
 └── README.md # Project documentation
@@ -43,21 +47,25 @@ weatherwise-etl-pipeline/
    ```bash
    git clone https://github.com/your-username/weatherwise-etl-pipeline.git
    cd weatherwise-etl-pipeline
+   ```
 
 2. Install the required Python dependencies:
    ```bash
    pip install -r requirements.txt
+   ```
 
 3. Configure the config.yaml file:
 
-  Add your OpenWeatherMap API key.
-  ```bash
-  apiKey: "your_api_key_here"
+   Add your OpenWeatherMap API key.
+   ```yaml
+   apiKey: "your_api_key_here"
+   ```
 
 ## Usage
 1. Run the ETL pipeline:
    ```bash
    python pipeline.py
+   ```
 
 2. The pipeline will:
 
@@ -76,17 +84,17 @@ weatherwise-etl-pipeline/
     +---------+-------+------------+--------+-----------+----------+----------+
 
     Processed Data
-    Processed Data
     Stored in data/processed/.
 
 ## Testing
-    Run unit tests to ensure the pipeline works as expected:
-    ```bash
-    pytest tests/
+Run unit tests to ensure the pipeline works as expected:
+```bash
+pytest tests/
+```
 
 ## License
-    This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-    Acknowledgments
-    - OpenWeatherMap API for providing weather data.
-    - Apache Spark for enabling scalable data processing.
+## Acknowledgments
+- OpenWeatherMap API for providing weather data.
+- Apache Spark for enabling scalable data processing.
