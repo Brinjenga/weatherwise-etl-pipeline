@@ -1,2 +1,6 @@
 apiKey: ${WEATHERWISE_API_KEY}
-cities:["London", "New York", "Tokyo"]
+cities:
+  - London
+  - New York
+  - Tokyo
+  - Sydney

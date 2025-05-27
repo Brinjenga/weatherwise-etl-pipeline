@@ -21,11 +21,11 @@ def transform_weather_data(raw_data, spark):
         schema = StructType([
             StructField("city", StringType(), True),
             StructField("country", StringType(), True),
-            StructField("temperature", DoubleType(), True),
-            StructField("humidity", DoubleType(), True),
+            StructField("temperature", StringType(), True),
+            StructField("humidity", StringType(), True),
             StructField("weather", StringType(), True),
-            StructField("wind_speed", DoubleType(), True),
-            StructField("timestamp", LongType(), True)
+            StructField("wind_speed", StringType(), True),
+            StructField("timestamp", StringType(), True)
         ])
 
         # Extract and transform relevant fields

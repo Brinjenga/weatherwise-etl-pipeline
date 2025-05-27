@@ -1,8 +1,13 @@
 import yaml
+import os
+from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 from etl.extract import get_weather_data, save_raw_data_to_csv
 from etl.transform import transform_weather_data
 from etl.load import load_weather_data
+
+# Load environment variables from .env file
+load_dotenv()
 
 def load_config(config_file):
     """
@@ -16,7 +21,11 @@ def load_config(config_file):
     """
     try:
         with open(config_file, 'r') as file:
-            return yaml.safe_load(file)
+            config = yaml.safe_load(file)
+
+            # Inject API key from environment variables
+            config['apiKey'] = os.getenv('WEATHERWISE_API_KEY')
+            return config
     except FileNotFoundError:
         print(f"Configuration file {config_file} not found.")
         return None
@@ -29,7 +38,7 @@ def main():
     Main function to orchestrate the ETL pipeline.
     """
     # Load configuration
-    config = load_config("config.yaml")
+    config = load_config("config/config.yaml")
     if config is None:
         print("Failed to load configuration. Exiting pipeline.")
         return
