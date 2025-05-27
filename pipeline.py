@@ -1,8 +1,8 @@
 import yaml
 from pyspark.sql import SparkSession
-from etl.extract import get_weather_data
-from etl.transform import transform_weather_data  
-from etl.load import load_weather_data          
+from etl.extract import get_weather_data, save_raw_data_to_csv
+from etl.transform import transform_weather_data
+from etl.load import load_weather_data
 
 def load_config(config_file):
     """
@@ -34,12 +34,16 @@ def main():
         print("Failed to load configuration. Exiting pipeline.")
         return
 
-    # Extract API key and city name from the configuration
+    # Extract API key and city names from the configuration
     api_key = config.get("apiKey")
-    city_name = "New York"
+    cities = config.get("cities", [])
 
     if not api_key:
         print("API key is missing in the configuration. Exiting pipeline.")
+        return
+
+    if not cities:
+        print("No cities specified in the configuration. Exiting pipeline.")
         return
 
     # Initialize Spark session
@@ -47,17 +51,26 @@ def main():
         .appName("WeatherDataETL") \
         .getOrCreate()
 
-    # Step 1: Extract
-    raw_data = get_weather_data(city_name, api_key, spark)
-    if raw_data is None:
-        print("Failed to fetch weather data. Exiting pipeline.")
-        return
+    for city_name in cities:
+        print(f"Processing weather data for city: {city_name}")
 
-    # Step 2: Transform
-    transformed_data = transform_weather_data(raw_data)
+        # Step 1: Extract
+        raw_data = get_weather_data(city_name, api_key)
+        if raw_data is None:
+            print(f"Failed to fetch weather data for {city_name}. Skipping.")
+            continue
 
-    # Step 3: Load
-    load_weather_data(transformed_data)
+        # Save raw data to CSV
+        save_raw_data_to_csv(city_name, raw_data)
+
+        # Step 2: Transform
+        transformed_data = transform_weather_data(raw_data, spark)
+        if transformed_data is None:
+            print(f"Failed to transform weather data for {city_name}. Skipping.")
+            continue
+
+        # Step 3: Load
+        load_weather_data(transformed_data)
 
     # Stop the Spark session
     spark.stop()
