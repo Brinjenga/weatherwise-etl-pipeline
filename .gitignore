@@ -174,5 +174,5 @@ cython_debug/
 .pypirc
 
 # Test data 
-data/processed/
-data/raw/
+data/processed
+data/raw
